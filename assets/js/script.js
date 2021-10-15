@@ -101,3 +101,59 @@ var quiz = [{
   ]
 }
 ];
+
+// Presenting the rules
+function quizRules() {
+  var contentHolderEl = createContentHolder();
+  
+  var headingEl = document.createElement("h1");
+  headingEl.innerText = "JavaScript Quiz";
+  headingEl.className = "rule-text";
+  
+  var rule1El = document.createElement("p");
+  rule1El.innerText = "Are you ready for our quiz?";
+  rule1El.className = "rule-text";
+  
+  var rule2El = document.createElement("p");
+  rule2El.innerText = "You have just 1 minute to answer 5 questions.";
+  rule2El.className = "rule-text";
+  
+  var rule3El = document.createElement("p");
+  rule3El.innerText = "You loose 10 seconds for each wrong answer.";
+  rule3El.className = "rule-text";
+  
+  var rule4El = document.createElement("p");
+  rule4El.innerText = "Good luck!";
+  rule4El.className = "rule-text";
+  
+  var buttonContainerEl = document.createElement("p");
+  buttonContainerEl.className = "rule-text";
+  
+  var startQuizButtonEl = document.createElement("button");
+  startQuizButtonEl.innerText = "Start Quiz";
+  startQuizButtonEl.className = "start-quiz";
+  
+  buttonContainerEl.appendChild(startQuizButtonEl);
+  
+  contentHolderEl.appendChild(headingEl);
+  contentHolderEl.appendChild(rule1El);
+  contentHolderEl.appendChild(rule2El);
+  contentHolderEl.appendChild(rule3El);
+  contentHolderEl.appendChild(rule4El);
+  contentHolderEl.appendChild(buttonContainerEl);
+  
+  contentContainerEl.appendChild(contentHolderEl);
+  }
+  
+
+
+
+// Quiz function
+function startQuiz() {
+  inQuiz = true;
+  timeCounter = 60; 
+  displayTimer();
+  
+  countdownInterval = setInterval(countdown, 1000);
+  createQuizQuestion(0);
+  }
