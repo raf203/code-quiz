@@ -102,6 +102,25 @@ var quiz = [{
 }
 ];
 
+// Variables for timeCounter 
+var timeCounter = 0; 
+var countdownInterval = null;
+
+var bodyContainerEl = document.getElementById("body");
+bodyContainerEl.addEventListener("click", clickAction);
+//bodyContainerEl.addEventListener("keypress", keyPressHandler);
+
+var contentContainerEl = document.getElementById("content-container");
+
+var timerEl = document.getElementById("timer");
+
+var highScores = [];
+var inQuiz = false;
+
+getSavedScores();
+quizRules();
+
+
 // Presenting the rules
 function quizRules() {
   var contentHolderEl = createContentHolder();
@@ -148,9 +167,11 @@ function quizRules() {
 
 
 
-// Quiz function
+// Start the quiz
 function startQuiz() {
   inQuiz = true;
+  
+  //1 minute for the quiz
   timeCounter = 60; 
   displayTimer();
   
