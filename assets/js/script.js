@@ -164,7 +164,73 @@ function quizRules() {
   contentContainerEl.appendChild(contentHolderEl);
   }
   
+// Clear container to the next question
+function clearContainer() {
+  var contentHolderEl = document.getElementById("content-holder");
+  if (contentHolderEl) {
+    contentContainerEl.removeChild(contentHolderEl);
+  }
+  }
+  
+  // Click actions
+  function clickAction(event) {
+  var target = event.target;
+  
+  switch (target.className) {
+    case "btn-answer":
+        handleAnswer(target);
+        break;
+  
+    case "btn-clear":
+        highScores = [];
+        clearContainer();
+        saveScore();
+        showScore();
+        break;
+  
+    case "display-score":
+        // disable if user taking quiz
+        if (!inQuiz) {
+            clearContainer();
+            showScore()} 
+            
+        break;
+  
+    case "btn-back":
+        clearContainer();
+        quizRules();
+        break;
+  
+    case "start-quiz":
+        clearContainer();
+        startQuiz();
+        break;
+  
+    case "submit-button":
+        nameHighScore();
+        break;
+  
+    default:
+        break;
+  }
+  }
 
+  // Create the content holder for the center screen
+function createContentHolder() {
+  var contentHolderEl = document.createElement("div");
+  contentHolderEl.id = "content-holder";
+  contentHolderEl.className = "content-holder";
+  
+  return contentHolderEl;
+  }
+  
+  // Saved scores at local Storage
+function getSavedScores() {
+  var savedScores = window.localStorage.getItem("high-scores");
+  if (savedScores) {
+    highScores = JSON.parse(savedScores);
+  }
+  }
 
 
 // Start the quiz
