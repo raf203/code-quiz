@@ -215,6 +215,17 @@ function clearContainer() {
   }
   }
 
+  // Countdown to 0 seconds
+function countdown() {
+  if (timeCounter > 0) {
+    timeCounter--;
+    displayTimer();
+  } else {
+    clearContainer();
+    endQuiz();
+  }
+  }
+
   // Create the content holder for the center screen
 function createContentHolder() {
   var contentHolderEl = document.createElement("div");
@@ -223,6 +234,41 @@ function createContentHolder() {
   
   return contentHolderEl;
   }
+
+  // Create the quiz question for the index in quiz
+function createQuizQuestion(index) {
+  var contentHolderEl = createContentHolder();
+  
+  var contentEl = document.createElement("h2");
+  contentEl.className = "content";
+  
+  contentHolderEl.appendChild(contentEl);
+  
+  var quizItem = quiz[index];
+  contentEl.textContent = quizItem.question;
+  
+  //Loop for the questions
+  for (var i = 0; i < quizItem.answers.length; i++) {
+    const answer = quizItem.answers[i];
+    var answerDivEl = document.createElement("div");
+    answerDivEl.className = "button-container";
+    var answerEl = document.createElement("button");
+  
+    answerEl.className = "btn-answer";
+    answerEl.textContent = (i + 1) + ")  " + answer.display;
+    answerEl.setAttribute("data-index", index);
+  
+    if (answer.correct === true) {
+        answerEl.setAttribute("data-correct", "true");
+    }
+  
+    answerDivEl.appendChild(answerEl);
+    contentEl.appendChild(answerDivEl);
+  }
+  
+  contentContainerEl.appendChild(contentHolderEl);
+  }
+  
 
   // Display the timer
 function displayTimer() {

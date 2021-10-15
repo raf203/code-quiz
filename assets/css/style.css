@@ -17,6 +17,11 @@
     color: var(--blue);
   }
 
+  .timer {
+    font-size: 20px;;
+    margin: 10px;
+  }
+
   .content-container {
     background-color: var(--paper);
     padding: 10px;
