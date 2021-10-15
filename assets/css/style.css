@@ -1,6 +1,20 @@
 :root {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    --paper: #d5d5d5;
+    --green: #9099A2;
+    --blue: #6D7993;
+    --purple: #96858F;
+  }
 
+  body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: unset;
+    justify-content: space-between;
+  }
+
+  p {
+    color: var(--blue);
   }
 
 .rule-text{
