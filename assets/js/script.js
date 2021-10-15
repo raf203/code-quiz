@@ -283,6 +283,46 @@ function getSavedScores() {
   }
   }
 
+  // Handle an answer button
+function handleAnswer(buttonEl) {
+  var index = buttonEl.getAttribute("data-index");
+  var resultEl = document.createElement("p");
+  resultEl.className = "result";
+  
+  
+  //Correct or wrong answer
+  if (buttonEl.hasAttribute("data-correct")) {
+    resultEl.textContent = "CORRECT!";
+  } 
+  // User loses 10 seconds for incorrect answer.
+  else {
+    resultEl.textContent = "WRONG!";
+    timeCounter -= 10; 
+    if (timeCounter <= 0) {
+        timeCounter = 0;
+    }
+  
+    displayTimer();
+  }
+  
+  var contentHolderEl = document.getElementById("content-holder");
+  contentHolderEl.appendChild(resultEl);
+  
+  setTimeout(function () {
+    clearContainer();
+  
+    var currIndex = parseInt(index) + 1;
+    if (currIndex < quiz.length && timeCounter) {
+        createQuizQuestion(currIndex);
+    } else {
+        endQuiz();
+    }
+  }, 1000);
+  
+  
+  }
+  
+
 
 // Start the quiz
 function startQuiz() {
