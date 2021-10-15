@@ -223,6 +223,11 @@ function createContentHolder() {
   
   return contentHolderEl;
   }
+
+  // Display the timer
+function displayTimer() {
+  timerEl.textContent = " " + timeCounter;
+  }
   
   // Saved scores at local Storage
 function getSavedScores() {
