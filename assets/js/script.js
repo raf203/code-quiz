@@ -189,7 +189,6 @@ function clearContainer() {
         break;
   
     case "display-score":
-        // disable if user taking quiz
         if (!inQuiz) {
             clearContainer();
             showScore()} 
@@ -226,7 +225,7 @@ function countdown() {
   }
   }
 
-  // Create the content holder for the center screen
+  // Create the content holder 
 function createContentHolder() {
   var contentHolderEl = document.createElement("div");
   contentHolderEl.id = "content-holder";

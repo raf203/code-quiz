@@ -17,6 +17,10 @@
     color: var(--blue);
   }
 
+  .high-score {
+    margin-bottom: 5px;
+  }
+
   .timer {
     font-size: 20px;;
     margin: 10px;
@@ -52,3 +56,32 @@
     padding-top: 10px;
     text-align: left;
   }
+
+  .btn-back,
+  .btn-clear {
+    margin: 5px;
+  }
+
+  .result {
+    border-top: 1pt solid var(--blue);
+  }
+
+  .display-score {
+    color: black;
+    background-color: #c5c7ce;
+    border: 1px solid;
+    font-size: 15px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  #submit-button {
+    margin-left: 10px;
+  }
+
+  @media screen and (max-width: 575px) {
+    body {
+      
+      justify-content: center;
+      
+      }
