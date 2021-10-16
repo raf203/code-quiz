@@ -24,3 +24,4 @@ https://raf203.github.io/code-quiz/
 
 ## GitHub Repository
 https://github.com/raf203/code-quiz
+<img width="1440" alt="Screen Shot 2021-10-16 at 11 57 50 AM" src="https://user-images.githubusercontent.com/89607465/137599128-bebe58b8-f551-4a17-b7e0-7fd6e343d60c.png">
