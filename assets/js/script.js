@@ -274,6 +274,47 @@ function createQuizQuestion(index) {
 function displayTimer() {
   timerEl.textContent = " " + timeCounter;
   }
+
+  // End the quiz
+function endQuiz() {
+  clearInterval(countdownInterval);
+  
+  // Insert name for high score
+  var contentHolderEl = createContentHolder();
+  
+  var inputHeaderTextEl = document.createElement("h1");
+  inputHeaderTextEl.innerText = "That's all";
+  contentHolderEl.appendChild(inputHeaderTextEl);
+  
+  var inputNormalTextEl = document.createElement("p");
+  inputNormalTextEl.innerText = "Result " + timeCounter + " points.";
+  contentHolderEl.appendChild(inputNormalTextEl);
+  
+  var inputHolderEl = document.createElement("p");
+  inputNormalTextEl.appendChild(inputHolderEl);
+  
+  var labelEl = document.createElement("label");
+  labelEl.innerText = "Insert yor name: ";
+  labelEl.setAttribute("for", "input-field");
+  inputHolderEl.appendChild(labelEl);
+  
+  var nameInputEl = document.createElement("input");
+  nameInputEl.className = "input-field";
+  nameInputEl.name = "input-field";
+  nameInputEl.id = "input-field";
+  inputHolderEl.appendChild(nameInputEl);
+  
+  var submitBtnEl = document.createElement("button");
+  submitBtnEl.className = "submit-button";
+  submitBtnEl.id = "submit-button";
+  submitBtnEl.innerText = "Submit";
+  inputHolderEl.appendChild(submitBtnEl);
+  
+  contentContainerEl.appendChild(contentHolderEl);
+  
+  nameInputEl.focus();
+  }
+  
   
   // Saved scores at local Storage
 function getSavedScores() {
@@ -288,8 +329,6 @@ function handleAnswer(buttonEl) {
   var index = buttonEl.getAttribute("data-index");
   var resultEl = document.createElement("p");
   resultEl.className = "result";
-  
-  
   //Correct or wrong answer
   if (buttonEl.hasAttribute("data-correct")) {
     resultEl.textContent = "CORRECT!";
@@ -321,8 +360,94 @@ function handleAnswer(buttonEl) {
   
   
   }
-  
 
+  // Save score
+function saveScore() {
+  var saveScores = JSON.stringify(highScores);
+  window.localStorage.setItem("high-scores", saveScores);
+  console.log(saveScores);
+  }
+
+  // Insert name in Hight Score    
+function nameHighScore() {
+  var contentHolderEl = document.getElementById("content-holder")
+  if (contentHolderEl) {
+    var inputFieldEl = document.getElementById("input-field");
+    if (inputFieldEl) {
+        var input = inputFieldEl.value;
+        if (input) {
+            clearContainer();
+            var tempScores = [];
+  
+            var currScore = {
+                initials: input,
+                score: timeCounter
+            }
+  
+            var inserted = false;
+            if (!highScores.length) {
+                tempScores.push(currScore);
+            } else {
+                // Insert highest score 
+                for (var i = 0; i < highScores.length; i++) {
+                    if (!inserted && currScore.score >= highScores[i].score) {
+                        inserted = true;
+                        tempScores.push(currScore);
+                    }
+                    tempScores.push(highScores[i]);
+                }
+  
+                if (!inserted) {
+                    tempScores.push(currScore);
+                }
+            }
+  
+            highScores = tempScores;
+            inQuiz = false;
+  
+            saveScore();
+            showScore();
+        } 
+    }
+  }
+  }
+  
+// Show high scores
+function showScore() {
+  var contentHolderEl = createContentHolder();
+  
+  var highScoresTitleEl = document.createElement("h2");
+  highScoresTitleEl.textContent = "High scores";
+  
+  contentHolderEl.appendChild(highScoresTitleEl);
+  
+  // Insert hight score
+  for (var i = 0; i < highScores.length; i++) {
+    var lastScoreEl = document.createElement("div");
+    lastScoreEl.className = "high-score";
+    lastScoreEl.textContent = (i + 1) + ":" + highScores[i].initials.trim() + " - " + highScores[i].score;
+  
+    contentHolderEl.appendChild(lastScoreEl)
+    console.log(lastScoreEl);
+  }
+  
+  var btnHolderEl = document.createElement("div");
+  
+  //Buttons inside Hight score
+  var backBtnEl = document.createElement("button");
+  backBtnEl.className = "btn-back";
+  backBtnEl.innerText = "Back";
+  btnHolderEl.appendChild(backBtnEl);
+  
+  var clearScoreEl = document.createElement("button");
+  clearScoreEl.className = "btn-clear";
+  clearScoreEl.innerText = "Clear high scores";
+  btnHolderEl.appendChild(clearScoreEl);
+  
+  contentHolderEl.appendChild(btnHolderEl);
+  
+  contentContainerEl.appendChild(contentHolderEl);
+  }
 
 // Start the quiz
 function startQuiz() {

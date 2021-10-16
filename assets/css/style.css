@@ -42,5 +42,13 @@
     color: var(--paper);
     font-size: 20px;
     border-radius: 3px;
-    
+    }
+
+  button:hover {
+    background-color: var(--blue);
+  }
+
+  .button-container {
+    padding-top: 10px;
+    text-align: left;
   }
